@@ -10,5 +10,6 @@ public interface MyList<E> {
     void remove(int index);
     E get(int index);
     int size();
+    boolean contains(E e);
     void print();
 }

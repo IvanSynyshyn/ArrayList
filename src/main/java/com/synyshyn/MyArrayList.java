@@ -15,28 +15,32 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     public void add(E obj) {
-        increaseSize();
-        myArray[size++] = obj;
+        add(size, obj);
     }
 
     public void add(E... obj) {
         for (int i = 0; i < obj.length; i++) {
-            increaseSize();
-            myArray[size++] = obj[i];
+            add(size, obj[i]);
         }
     }
 
     public void add(int index, E obj) {
-        increaseSize();
-        for (int i = size + 1; i > index; i--) {
-            myArray[i] = myArray[i - 1];
+        if (index == 0 && size == 0) {
+            myArray[size++] = obj;
+        } else if (index >= 0 && index <= size) {
+            increaseSize();
+            for (int i = size + 1; i > index; i--) {
+                myArray[i] = myArray[i - 1];
+            }
+            myArray[index] = obj;
+            size++;
+        } else {
+            throw new ArrayIndexOutOfBoundsException("You can not do it. Use number between 0 and " + (size - 1));
         }
-        myArray[index] = obj;
-        size++;
     }
 
     public void remove(int index) {
-        if (index > 0 && index < size) {
+        if (index >= 0 && index < size) {
             myArray[index] = null;
             for (int tmp = index; tmp < size; tmp++) {
                 myArray[tmp] = myArray[tmp + 1];
@@ -49,7 +53,7 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     public E get(int index) {
-        if (index > 0 && index < size) {
+        if (index >= 0 && index < size) {
             return (E) myArray[index];
         } else {
             throw new ArrayIndexOutOfBoundsException("You can not do it. Use number between 0 and " + (size - 1));
@@ -58,6 +62,17 @@ public class MyArrayList<E> implements MyList<E> {
 
     public int size() {
         return size;
+    }
+
+    public boolean contains(E e) {
+        boolean result = false;
+        for (int i = 0; i < size; i++) {
+            if (myArray[i].equals(e)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     public void print() {

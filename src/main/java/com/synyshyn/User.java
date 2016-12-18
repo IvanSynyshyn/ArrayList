@@ -1,5 +1,7 @@
 package com.synyshyn;
 
+import java.util.Objects;
+
 /**
  * Created by Ivan Synyshyn on 17.12.2016.
  */
@@ -31,5 +33,18 @@ public class User {
     @Override
     public String toString() {
         return (firstName + " " + secondName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, secondName);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        User user = (User) obj;
+        return (Objects.equals(firstName, user.getFirstName()) && Objects.equals(secondName, user.getSecondName()));
     }
 }

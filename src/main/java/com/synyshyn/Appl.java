@@ -17,6 +17,7 @@ public class Appl {
         list.print();
         System.out.println("___________________");
         System.out.println(list.get(2));
+        System.out.println(list.contains(new User("Axl", "Rose")));
         System.out.println("___________________");
 
         list.remove(1);

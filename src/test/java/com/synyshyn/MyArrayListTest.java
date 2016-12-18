@@ -52,10 +52,24 @@ public class MyArrayListTest {
         assertEquals(3, listToAdd.size());
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test
     public void add2() throws Exception {
+        MyList<Integer> listToAdd = new MyArrayList();
+        listToAdd.add(0, 10);
+        listToAdd.add(1, 12);
+        listToAdd.add(2, 15);
+        assertEquals(3, listToAdd.size());
+        listToAdd.add(1, 20);
+        assertEquals(4, listToAdd.size());
+        assertEquals(20, (long) listToAdd.get(1));
+        assertEquals(15, (long) listToAdd.get(3));
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void add3() throws Exception {
         list.add(10, 15);
     }
+
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void remove() throws Exception {
@@ -64,11 +78,13 @@ public class MyArrayListTest {
 
     @Test
     public void remove1() throws Exception {
-        MyList<Object> listToRemove = new MyArrayList();
-        listToRemove.add(new Object(), new Object(), new Object());
-        assertEquals(3, listToRemove.size());
+        MyList<Integer> listToRemove = new MyArrayList();
+        listToRemove.add(10, 20, 30, 40);
+        assertEquals(4, listToRemove.size());
+        assertEquals(20, (long) listToRemove.get(1));
         listToRemove.remove(1);
-        assertEquals(2, listToRemove.size());
+        assertEquals(3, listToRemove.size());
+        assertEquals(30, (long) listToRemove.get(1));
     }
 
     @Test
@@ -79,5 +95,11 @@ public class MyArrayListTest {
     @Test
     public void size() throws Exception {
         assertEquals(3, list.size());
+    }
+
+    @Test
+    public void contains() throws Exception {
+        assertTrue(list.contains(2));
+        assertFalse(list.contains(20));
     }
 }
