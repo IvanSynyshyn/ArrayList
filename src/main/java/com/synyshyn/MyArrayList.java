@@ -65,14 +65,12 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     public boolean contains(E e) {
-        boolean result = false;
         for (int i = 0; i < size; i++) {
             if (myArray[i].equals(e)) {
-                result = true;
-                break;
+                return true;
             }
         }
-        return result;
+        return false;
     }
 
     public void print() {
